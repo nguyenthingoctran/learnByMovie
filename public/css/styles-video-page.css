@@ -1,0 +1,7 @@
+#cotent-video h2{
+	text-transform: capitalize;
+}
+
+#cotent-video video{
+	width:650px;
+}
