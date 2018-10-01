@@ -45,7 +45,9 @@
 								<p class='done'>Chưa hoàn thành</p>
 							@endif
 						<div class='act'>
+							<input type="hidden" id="{{$itemDetail->movie_id}}" class="mid">
 							<a href="{{url('lbm_admin/episodes/edit/'.$itemEpi->episodes_id.'')}}"><span class='glyphicon glyphicon-pencil'></span></a>
+							<a id="{{$itemEpi->completed}}" class="lock_episodes"><span id="{{$itemEpi->episodes_id}}" class='glyphicon glyphicon-lock'></span></a>
 							<a href="{{url('lbm_admin/episodes/delEp/'.$itemEpi->episodes_id.'')}}" onclick="return WannaDel()"><span class='glyphicon glyphicon-remove'></span></a>
 						</div>
 						</div>
@@ -54,6 +56,10 @@
 
 		</div>
 		@endforeach
+		
+		<script>
+			var lockUrl = '{{route('lockEpisodes')}}';
+		</script>
 
 	</div>
 @stop

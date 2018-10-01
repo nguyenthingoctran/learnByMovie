@@ -155,7 +155,7 @@ class FilmController extends Controller
         ->join('movie','episodes.movie_id','=','movie.movie_id')
         ->where('movie.movie_id','=',$id);
         
-        $epi = $episodes->orderBy('episodes.episodes_id','desc')->get();
+        $epi = $episodes->get();
         return view('lbm_admin.film.detail')->with(['detail'=>$detail,
                                                     'senten'=>$senten,
                                                     'epi'=>$epi]);
@@ -168,4 +168,5 @@ class FilmController extends Controller
         ]);
         return redirect()->back();
     }
+
 }

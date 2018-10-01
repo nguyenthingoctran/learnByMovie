@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,7 @@ use File;
 use App\User;
 use DateTime;
 use DB;
-
+use App\Lib\Library;
 class UsersController extends Controller
 {
     /**
@@ -189,10 +190,12 @@ class UsersController extends Controller
         $countS = $sentence->count();
         $getS = $sentence->get();
 
-        $getUserSentence = DB::table('user_sentence')
+        $userSentence = DB::table('user_sentence')
         ->select('user_id','episodes_id','numOrder')
-        ->where('user_id','=',Auth::user()->id)
-        ->get();
+        ->where('user_id','=',Auth::user()->id);
+
+        $getUserSentence = $userSentence->get();
+        $countUS = $userSentence->count();
 
         foreach ($getS as $valueGS) {
             foreach ($getUserSentence as $valueGUS) {
@@ -202,6 +205,9 @@ class UsersController extends Controller
             }
         }
 
+        if($countUS == 0){
+            return redirect()->route('listFilm');
+        }
 
         if($countS != 0){
             return view('lbm_admin.home.home_ask_check')
@@ -232,9 +238,14 @@ class UsersController extends Controller
             ->where('user_id','=',Auth::user()->id)
             ->orderBy('created_at',' desc')
             ->first();
+            
+            include(app_path() . '\Lib\getPreId.php');
+            $prevEp = getPreId();
+
             return view('lbm_admin.home.home_completed_wrong')
-            ->withErrors('Bạn đã thuộc hết các câu đã làm sai rồi đấy!!!')
-            ->with('eid',$eid->episodes_id);
+            ->with(['eid'=> $eid->episodes_id,
+                'prevEp' => $prevEp
+                    ]);
         }
     }
 }

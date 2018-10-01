@@ -117,6 +117,7 @@ $(document).ready(function($) {
 		$(this).closest(".action").find("#right").css('border-bottom','none');
 		$(this).closest('li').find('#enterEnRight').fadeIn('slow');
 		$(this).closest('li').find('#enterVi').fadeOut('slow');
+		$(this).closest('li').find('#doneCheck').fadeOut('slow');
 	});
 
 	//Gõ chữ vào input sửa câu English
@@ -245,6 +246,32 @@ $(document).ready(function($) {
 			window.location="http://localhost/learnByMovie1.1/lbm_admin/words/listVocabulary";
 		});
 		
+	});
+
+	//Mở khóa và khóa episodes khi kết thúc một tập phim
+	$(".glyphicon-lock").click(function(event) {
+		event.preventDefault();
+		var lock = confirm("Tập phim này đã được bạn học xong. Bạn muốn khóa để không thêm bất cứ câu nào nữa?");
+		if(lock){
+			var complete = $(".lock_episodes").attr('id');
+			var eid = $(this).attr('id');
+			var mid = $(".mid").attr('id');
+
+			if(complete == 1){
+				complete = 2;
+			}else{
+				complete = 1;
+			}	
+
+			$.ajax({
+				url: lockUrl,
+				method: 'POST',
+				data: {complete: complete, eid: eid},
+			})
+			.done(function(msg) {
+				window.location="http://localhost/learnByMovie1.1/lbm_admin/film/detail/"+mid;
+			});
+		}
 	});
 
 });

@@ -49,9 +49,17 @@ Route::group(['middleware'=>'auth'],function(){
 				Route::post('addfilm',['as'=>'addfilm','uses'=>'FilmController@postAdd']);
 				Route::get('editfilm/{movie_id}',['as'=>'editfilm','uses'=>'FilmController@editFilm']);
 				Route::post('editfilm/{movie_id}',['as'=>'posteditfilm','uses'=>'FilmController@posteditFilm']);
-				Route::post('search',['as'=>'search','uses'=>'FilmController@search']);
+				Route::post('search',['as'=>'search.film','uses'=>'FilmController@search']);
 				Route::get('detail/{id}',['as'=>'detail','uses'=>'FilmController@detail']);
 				Route::post('editEn/{mid}',['as'=>'editEn','uses'=>'FilmController@editEn']);
+				Route::post('lockEpisodes', function(\Illuminate\Http\Request $request){
+					DB::table('episodes')
+					->where('episodes_id',$request['eid'])
+					->update([
+						'completed' => $request['complete'],
+						'episodes_updated_at' => new DateTime
+					]);
+				})->name('lockEpisodes');
 			});
 			Route::group(['prefix'=>'episodes'], function(){
 				Route::get('addEp/{id}',['as'=>'addEp','uses'=>'EpisodesController@getAdd']);
@@ -116,6 +124,9 @@ Route::group(['middleware'=>'auth'],function(){
 				})->name('editSentence');
 				Route::get('delSen/{eid}/{num}',['as'=>'delSen','uses'=>'SentenceController@delSen']);
 			});
+
+
+			// Word
 			Route::group(['prefix'=>'words'],function(){
 				Route::get('listVocabulary',['as'=>'listVocabulary','uses'=>'VocabularyController@listVocabulary']);
 				Route::post('/addVocabulary',function(\Illuminate\Http\Request $request){
@@ -124,34 +135,30 @@ Route::group(['middleware'=>'auth'],function(){
 						'english_words' => trim($request['en']),
 						'vietnamese_words' => trim($request['nghia']),
 						'created_at' => new DateTime
-					]);
-				})->name('addVocabulary');
-			});
-			Route::get('practiceWord',['as'=>'practiceWord','uses'=>'VocabularyController@practiceWord']);
-			Route::post('checkVocabulary',['as'=>'checkVocabulary','uses'=>'VocabularyController@checkVocabulary']);
-			Route::post('editVocabulary',function(\Illuminate\Http\Request $request){
-				// return response()->json([
-				// 	'en' => $request['en'],
-				// 	'vi' => $request['vi']
-				// ]);
-				DB::table('vocabulary')
-				->where([
-					['user_id','=', Auth::user()->id],
-					['vietnamese_words','=',$request['vi']]
-				])
-				->orWhere([
-					['user_id','=', Auth::user()->id],
-					['english_words','=',$request['en']]
-				])
-				->update(
-				    [
-				    	'english_words' => $request['en'],
-				    	'vietnamese_words' => $request['vi'],
-				    	'updated_at' => new DateTime
-				    ]
-				);
-			})
-			->name('editVocabulary');
+						]);
+					})->name('addVocabulary');
+				});
+				Route::get('practiceWord',['as'=>'practiceWord','uses'=>'VocabularyController@practiceWord']);
+				Route::post('checkVocabulary',['as'=>'checkVocabulary','uses'=>'VocabularyController@checkVocabulary']);
+				Route::post('editVocabulary',function(\Illuminate\Http\Request $request){
+
+					DB::table('vocabulary')
+					->where([
+						['user_id','=', Auth::user()->id],
+						['vietnamese_words','=',$request['vi']]
+					])
+					->orWhere([
+						['user_id','=', Auth::user()->id],
+						['english_words','=',$request['en']]
+					])
+					->update(
+					    [
+					    	'english_words' => $request['en'],
+					    	'vietnamese_words' => $request['vi'],
+					    	'updated_at' => new DateTime
+					    ]
+					);
+				})->name('editVocabulary');
 		});
 });
 

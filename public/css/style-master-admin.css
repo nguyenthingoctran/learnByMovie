@@ -174,6 +174,7 @@ body{
 #middle .content .content_left #action-home{
 	width:100%;
 	float:left;
+	margin-top: 18px;
 }
 
 #middle .content .content_left #action-home a.continues{
@@ -195,6 +196,20 @@ body{
 	width:100%;
 	float:left;
 	padding:15px 45px;
+}
+
+#middle .content .content_left .learn_wrapper .action-learn a{
+	background: #FFF176;
+	padding:10px;
+	margin-top: 30px;
+	display: inline-block;
+	border-radius: 3px;
+	color:#9E9E9E;
+	text-decoration:none;
+}
+
+#middle .content .content_left .learn_wrapper .action-learn a:hover{
+	background: #FFFF00;
 }
 
 #middle .content .content_right h4.older span.added{
@@ -287,8 +302,8 @@ body{
 	text-transform: capitalize;
 }
 
-#middle .content .content_left .learn_wrapper .learn_area{
-	width:100%;
+#middle .content .content_left .learn_wrapper h2 a{
+	color:#636e72;
 }
 
 #middle .content .content_left .learn_wrapper .video_and_control{
@@ -300,14 +315,14 @@ body{
 #middle .content .content_left .learn_wrapper .video_and_control .cheVietsub{
 	position: absolute;
 	top: 68%;
-	left: 10%;
-	background: #ecf0f1;
-	width: 81%;
+	background: #212121;
+	width: 100%;
 	height: 25%;
 	border-radius: 3px;
 	text-align: center;
 	line-height: 79px;
 	font-size: 30px;
+	color: #EEEEEE;
 }
 
 #middle .content .content_left .learn_wrapper .video_and_control video{
@@ -505,6 +520,16 @@ body{
 	text-align: center;
 	font-size: 20px;
 	margin-top: 50px;
+	position:relative;
+}
+
+#middle .list #practiceVocabolary p span{
+	font-size: 11px;
+	color: red;
+	position: absolute;
+	top: 0px;
+	left: 97%;
+	font-weight: bold;
 }
 
 #middle .list #practiceVocabolary p.result{
@@ -615,11 +640,16 @@ body{
 }
 
 #middle .list .wrapper_detail .episodes .epWhat .act {
-	background: black;
+	background: #2c3e50;
 	position: absolute;
-	top:0px;
-	left:211px;
-	padding: 1px 3px;
+	top: 3px;
+	left: 175px;
+	padding: 5px 6px;
+	border-radius: 3px;
+}
+
+#middle .list .wrapper_detail .episodes .epWhat .act span.glyphicon{
+	font-size: 16px;
 }
 
 #middle .list .wrapper_detail .episodes .epWhat a{

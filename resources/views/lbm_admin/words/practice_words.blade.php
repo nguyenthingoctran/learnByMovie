@@ -7,7 +7,7 @@
 			<audio src='{{asset('public/sound/Correct Answer Sound Effect.mp3')}}' controls='controls' autoplay/>
 		</div>
 
-		<p class="vietnamese_word">{{$vocabulary->vietnamese_words}}</p>
+		<p class="vietnamese_word">{{$vocabulary->vietnamese_words}} <span class="times-word">{{$vocabulary->times}}</span></p>
 		
 		<form action="{{route('checkVocabulary')}}" method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">

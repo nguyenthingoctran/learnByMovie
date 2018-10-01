@@ -22,6 +22,8 @@ class VocabularyController extends Controller
     }
 
     public function practiceWord(){
+        
+       
     	$vocab = DB::table('vocabulary')->where('user_id','=',Auth::user()->id);
 
     	$vocabulary = $vocab->first();
@@ -54,7 +56,7 @@ class VocabularyController extends Controller
 				    	'user_id' => Auth::user()->id,
 				    	'english_words' => $vocabulary->english_words,
 				    	'vietnamese_words' => $vocabulary->vietnamese_words,
-				    	'updated_at' => new DateTime,
+				    	'created_at' => new DateTime,
 				    	'times' => $time
 				    ]
 				);

@@ -206,7 +206,10 @@ class EpisodesController extends Controller
   	}
 
   	public function getLearn($ide){
-  		$dataFilm=db::table('episodes')->join('movie','episodes.movie_id','=','movie.movie_id')->where('episodes.episodes_id','=',$ide)->get();
+  		$dataFilm=db::table('episodes')
+      ->join('movie','episodes.movie_id','=','movie.movie_id')
+      ->where('episodes.episodes_id','=',$ide)
+      ->get();
 
       $dataSen=db::table('sentence')
       ->where([['episodes_id','=',$ide],
@@ -225,7 +228,8 @@ class EpisodesController extends Controller
       $getSentense = db::table('sentence')
       ->select('english')
       ->where([['episodes_id','=',$ide],
-                ['vietnamese','<>','']])->get();
+                ['vietnamese','<>','']])
+      ->get();
 
       $dataFilmFirst = db::table('episodes')->where('episodes_id','=',$ide)->first();
 
@@ -236,32 +240,29 @@ class EpisodesController extends Controller
 
       $countNSNV = $newSenNotVi->count();
       $getNSNV = $newSenNotVi->get();
+      
+      //Hàm lấy id của tập trước
+      include(app_path() . '\Lib\getPreId.php');
+      $prevEp = getPreId();
 
-  		return view('lbm_admin/episodes/learn')->with([
-        'dataFilm'=>$dataFilm,
-        'countSen'=>$countSen,
-        'numOrder'=>$numOrder,
-        'getSentense'=>$getSentense,
-        'dataFilmFirst' => $dataFilmFirst,
-        'countNSNV' => $countNSNV,
-        'getNSNV' => $getNSNV]);
+      $EpCurrent = DB::table('user_sentence')
+      ->where('user_id',Auth::user()->id)
+      ->orderBy('created_at','desc')
+      ->first();
+      $getIdEC = $EpCurrent->episodes_id;
+
+        return view('lbm_admin/episodes/learn')->with([
+          'dataFilm'=>$dataFilm,
+          'countSen'=>$countSen,
+          'numOrder'=>$numOrder,
+          'getSentense'=>$getSentense,
+          'dataFilmFirst' => $dataFilmFirst,
+          'countNSNV' => $countNSNV,
+          'getNSNV' => $getNSNV,
+          'prevEp' => $prevEp,
+          'getIdEC' => $getIdEC
+        ]);
   	}
-
-    // public function continueLesson(){
-    //   $userSen = DB::table('user_sentence')
-    //   ->where([
-    //     ['user_id','=',Auth::user()->id],
-    //     ['numOrder','=',1]
-    //   ])
-    //   ->limit(2)
-    //   ->get();
-
-    //   retrun
-
-    //   echo "<pre>";
-    //   print_r($userSen);
-    //   echo "</pre>";
-    // }
 
 }
 

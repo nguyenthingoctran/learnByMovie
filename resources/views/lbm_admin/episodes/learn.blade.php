@@ -2,8 +2,16 @@
 
 @section('content')
 	<div class='learn_wrapper'>
+
 		@foreach($dataFilm as $itemDataFilm)
-			<h2>{{$itemDataFilm->movie_name_1}} tập {{$itemDataFilm->epi_name}} </h2>
+
+			@if($itemDataFilm->completed != 2)
+				<div class="alert alert-info">
+				  <strong>Nhắc nhớ:</strong> Hãy luyện nghe lại video cũ trước khi học bài mới nhé.
+				</div>
+			@endif
+
+			<h2><a href="{{url('lbm_admin/film/detail/'.$itemDataFilm->movie_id.'')}}">{{$itemDataFilm->movie_name_1}}</a> tập {{$itemDataFilm->epi_name}} </h2>
 			<div class='video_and_control'>
 				<video controls >
 				  <source src="{{asset('public/upload/movie/'.$itemDataFilm->link.'')}}">
@@ -11,19 +19,27 @@
 				</video> 
 				<div class="cheVietsub">Listen</div>				
 			</div>
-	
-			<div class='learn_area'>
-				<div class="soTT"><h3>{{ ++$numOrder}}</h3></div>
-				<div class="form_text">
-					<div class="enter_your_code"><textarea placeholder="Bạn hãy nhập câu nghe được theo số thứ tự ở trên" id="english"></textarea></div> 
-					<input type="hidden" value="{{$itemDataFilm->episodes_id}}" id="eid">
-					<input type="submit" value="Xong" id="xong">
-					
-				</div>			
-			</div>
+
+			@if($itemDataFilm->completed != 2)
+				<div class="action-learn">
+					<a href="{{url('lbm_admin/episodes/learn/'.$getIdEC.'')}}">Tiếp tục bài học</a>
+				</div>
+			@endif
+
+			@if($itemDataFilm->completed == 2)			
+				<div class='learn_area'>
+					<div class="soTT"><h3>{{ ++$numOrder}}</h3></div>
+					<div class="form_text">
+						<input type="hidden" id="BlockOrNone" class="{{$itemDataFilm->completed}}">
+						<div class="enter_your_code"><textarea placeholder="Bạn hãy nhập câu nghe được theo số thứ tự ở trên" id="english"></textarea></div> 
+						<input type="hidden" value="{{$itemDataFilm->episodes_id}}" id="eid">
+						<input type="submit" value="Xong" id="xong">
+					</div>			
+				</div>
+
+			@endif
 
 		@endforeach
-		
 	</div>
 	<script>
 		var url = '{{route('insert')}}';

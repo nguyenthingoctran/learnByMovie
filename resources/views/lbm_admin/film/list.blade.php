@@ -4,7 +4,7 @@
 	<div class='top_content'>
 		<h2>Danh sách phim <a href="{!! route('addfilm') !!}"><span class='glyphicon glyphicon-plus'></span></a></h2>
 
-		<form action='{{ route('search') }}' method='post'>
+		<form action='{{ route('search.film') }}' method='post'>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class='search'>
 				<input type='text' name='txtsearch' placeholder='Tìm kiếm...'/>

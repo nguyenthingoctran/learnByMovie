@@ -4,7 +4,7 @@
 	<div class='top_content'>
 		<h2>Danh sách phim <a href="{!! route('addfilm') !!}"><span class='glyphicon glyphicon-plus'></span></a></h2>
 
-		<form action='{{ route('search') }}' method='post'>
+		<form action='{{ route('search.film') }}' method='post'>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class='search'>
 				<input type='text' name='txtsearch' placeholder='Tìm kiếm...'/>
@@ -36,7 +36,7 @@
 						<tr>
 							<td align="center">{{ $stt++ }}</td>
 							<td><img src="{{asset('public/upload/poster/'.$itemfilm->movie_poster.'')}}" alt=""></td>
-							<td><a href="">{{ $itemfilm->movie_name_1 }}</a></td>
+							<td><a href="{{url('lbm_admin/film/detail/'.$itemfilm->movie_id.'')}}">{{ $itemfilm->movie_name_1 }}</a></td>
 							<td>{{ $itemfilm->kind_name }}</td>
 							<td align="center">1</td>
 							<td align="center"><a href="{{url('lbm_admin/film/editfilm/'.$itemfilm->movie_id.'')}}"><span class='glyphicon glyphicon-pencil'></span></a></td>
