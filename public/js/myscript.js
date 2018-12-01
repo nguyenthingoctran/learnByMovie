@@ -212,7 +212,7 @@ $(document).ready(function($) {
 			data: {eid:eid, numOrder:numOrder, en:en, vi:vi, mid:mid},
 		})
 		.done(function(){
-			window.location="http://localhost/learnByMovie1.1/lbm_admin/sentence/listSen/"+mid+"/"+eid;
+			window.location="http://learnbymovie.000webhostapp.com/lbm_admin/sentence/listSen/"+mid+"/"+eid;
 		});
 	});
 
@@ -235,7 +235,7 @@ $(document).ready(function($) {
 				data: {en:en, nghia:nghia},
 			})
 			.done(function(){
-					window.location="http://localhost/learnByMovie1.1/lbm_admin/words/listVocabulary";
+					window.location="https://learnbymovie.000webhostapp.com/lbm_admin/words/listVocabulary";
 			});
 		}
 	});
@@ -277,7 +277,7 @@ $(document).ready(function($) {
 				data: {complete: complete, eid: eid},
 			})
 			.done(function(msg) {
-				window.location="http://localhost/learnByMovie1.1/lbm_admin/film/detail/"+mid;
+				window.location="http://learnbymovie.000webhostapp.com/lbm_admin/film/detail/"+mid;
 			});
 		}
 
