@@ -19,7 +19,13 @@ class SentenceController extends Controller
     	$sentence = DB::table('sentence')->where('episodes_id','=',$eid)
     	->where('vietnamese','=','')->get();
     	$episodes = DB::table('episodes')->where('episodes_id','=',$eid)->first();
-    	$englishFile = DB::table('episodes')->join('movie', 'episodes.movie_id','=','movie.movie_id')->first();
+    	$englishFile = DB::table('episodes')
+        ->join('movie', 'episodes.movie_id','=','movie.movie_id')
+        ->where('episodes_id','=',$eid)
+        ->first();
+        // echo "<pre>";
+        // print_r($englishFile);
+        // echo "</pre>";
     	return view('lbm_admin.sentence.check')->with(['episodes' => $episodes,
     		'sentence' => $sentence,
     		'englishFile' => $englishFile]);

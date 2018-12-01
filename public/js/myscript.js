@@ -125,6 +125,14 @@ $(document).ready(function($) {
 		$(this).closest('li').find('#doneEnterEn').css('display','block');
 	});
 
+	// Chỉnh sửa trong phần check 
+	$(".action #edit").click(function(event) {
+		event.preventDefault();
+		$(this).closest('li').find('#edit').css('display','none');
+		$(this).closest('li').find('#right').css('display','block');
+		$(this).closest('li').find('#wrong').css('display','block');
+	});
+
 	//Xử lý dữ liệu khi nhấn vào nút nhập xong câu Enghlish
 	$(".action #doneEnterEn").click(function(event) {
 		event.preventDefault();
@@ -251,9 +259,9 @@ $(document).ready(function($) {
 	//Mở khóa và khóa episodes khi kết thúc một tập phim
 	$(".glyphicon-lock").click(function(event) {
 		event.preventDefault();
-		var lock = confirm("Tập phim này đã được bạn học xong. Bạn muốn khóa để không thêm bất cứ câu nào nữa?");
+		lock = confirm("Tập phim này đã được bạn học xong. Bạn muốn khóa để không thêm bất cứ câu nào nữa?");
 		if(lock){
-			var complete = $(".lock_episodes").attr('id');
+			var complete = $(this).closest('.epWhat').find('.lock_episodes').attr('id');
 			var eid = $(this).attr('id');
 			var mid = $(".mid").attr('id');
 
@@ -272,6 +280,7 @@ $(document).ready(function($) {
 				window.location="http://localhost/learnByMovie1.1/lbm_admin/film/detail/"+mid;
 			});
 		}
+
 	});
 
 });

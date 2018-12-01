@@ -10,10 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/','LoginController@getLogin'); 
+Route::post('/','LoginController@postLogin'); 
 
-
-Route::get('login',['as'=>'getLogin','uses'=>'LoginController@getLogin']);	
-Route::post('login',['as'=>'postLogin','uses'=>'LoginController@postLogin']);
+// Route::get('login',['as'=>'getLogin','uses'=>'LoginController@getLogin']);	
+// Route::post('login',['as'=>'postLogin','uses'=>'LoginController@postLogin']);
 
 Route::group(['middleware'=>'auth'],function(){	
 		Route::group(['prefix'=>'lbm_admin','namespace'=>'Admin'],function(){
@@ -59,6 +60,9 @@ Route::group(['middleware'=>'auth'],function(){
 						'completed' => $request['complete'],
 						'episodes_updated_at' => new DateTime
 					]);
+					// return response()->json([
+					// 	'com' => $request['complete']
+					// ]);
 				})->name('lockEpisodes');
 			});
 			Route::group(['prefix'=>'episodes'], function(){

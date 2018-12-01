@@ -229,6 +229,7 @@ class EpisodesController extends Controller
       ->select('english')
       ->where([['episodes_id','=',$ide],
                 ['vietnamese','<>','']])
+      ->orderBy('numOrder','asc')
       ->get();
 
       $dataFilmFirst = db::table('episodes')->where('episodes_id','=',$ide)->first();
@@ -242,7 +243,7 @@ class EpisodesController extends Controller
       $getNSNV = $newSenNotVi->get();
       
       //Hàm lấy id của tập trước
-      include(app_path() . '\Lib\getPreId.php');
+      include(app_path() . '/Lib/getPreId.php');
       $prevEp = getPreId();
 
       $EpCurrent = DB::table('user_sentence')

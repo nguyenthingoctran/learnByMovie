@@ -239,7 +239,7 @@ class UsersController extends Controller
             ->orderBy('created_at',' desc')
             ->first();
             
-            include(app_path() . '\Lib\getPreId.php');
+            include(app_path() . '/Lib/getPreId.php');
             $prevEp = getPreId();
 
             return view('lbm_admin.home.home_completed_wrong')

@@ -25,7 +25,6 @@ body{
 #middle{
 	width: 100%;
 	min-height: 560px;
-	background: url('../pictures/shadow.png');
 	float:left;
 }
 
@@ -169,6 +168,8 @@ body{
 #middle .content .content_left{
 	width:70%;
 	float:left;
+	box-shadow: 0px -13px 8px #bdc3c7;
+	min-height: 550px;
 }
 
 #middle .content .content_left #action-home{
@@ -199,17 +200,17 @@ body{
 }
 
 #middle .content .content_left .learn_wrapper .action-learn a{
-	background: #FFF176;
+	background: #C4E538;
 	padding:10px;
 	margin-top: 30px;
 	display: inline-block;
 	border-radius: 3px;
-	color:#9E9E9E;
+	color:#009432;
 	text-decoration:none;
 }
 
 #middle .content .content_left .learn_wrapper .action-learn a:hover{
-	background: #FFFF00;
+	background: #A3CB38;
 }
 
 #middle .content .content_right h4.older span.added{
@@ -478,6 +479,9 @@ body{
 	width:80%;
 	float:left;
 	color:#455a64;
+	box-shadow: 0px -13px 8px #bdc3c7;
+	min-height: 768px;
+
 }
 
 #middle .list #practiceVocabolary{

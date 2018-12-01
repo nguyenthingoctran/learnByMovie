@@ -2,14 +2,17 @@
 
 @section('list')
 	<div class='top_content'>
+
 		<h2 class="list-h2-capa">Lịch sử từ vựng 
 			<span id="addVocabulary" class='glyphicon glyphicon-plus'></span>
 		</h2>
+
 		<div class="divAddVocabulary">
 			<label for="txtEnVocabulary">English</label><input type="text" name="txtEnVocabulary" id="txtEnVocabulary"><br>
 			<label for="txtNghia">Nghĩa</label><input type="text" name="txtNghia" id="txtNghia">
 			<p id="okAddVoca">Xong</p>
 		</div>
+
 	</div>
 	
 	<div class='table_content'>

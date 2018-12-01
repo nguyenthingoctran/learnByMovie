@@ -16,8 +16,10 @@
 				<video controls >
 				  <source src="{{asset('public/upload/movie/'.$itemDataFilm->link.'')}}">
 				Your browser does not support the video tag.
-				</video> 
-				<div class="cheVietsub">Listen</div>				
+				</video>
+				@if($itemDataFilm->completed == 2)
+					<div class="cheVietsub">Listen</div>	
+				@endif			
 			</div>
 
 			@if($itemDataFilm->completed != 2)

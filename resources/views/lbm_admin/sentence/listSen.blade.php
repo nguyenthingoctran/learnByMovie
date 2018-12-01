@@ -20,7 +20,8 @@
 					@foreach($sentence as $valueS)
 						<tr>
 							<td align="center" id='numOrder'>{{$valueS->numOrder}}</td>
-							<td>{{$valueS->english}}
+							<td>{{$valueS->english}} <br>	
+								{{$valueS->vietnamese}}
 								<div class="editSen">
 									<input type="hidden" class="{{$movie->movie_id}}" id="eid" value="{{$valueS->episodes_id}}">
 									<br><b>Anh:</b> <input type="text" name="txten" class="txten" value="{{$valueS->english}}">
